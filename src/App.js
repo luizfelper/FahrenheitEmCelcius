@@ -1,22 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [value, setValue] = useState('teste');
+  const [celcius, setCelcius] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(value);
+      const valueConverted = Math.round((value - 32)  * 5 / 9);
+      setCelcius(valueConverted);
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Converter Fahrenheit em Celcius</p>
+        <form>
+          <input type="text" placeholder="Digite o valor em Fahrenheit"
+          onChange={handleChange}/>
+          <button onClick={handleSubmit}>Enviar</button>
+        </form>
+        <p>Celcius: {celcius}</p>
       </header>
     </div>
   );
