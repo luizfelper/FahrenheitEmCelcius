@@ -1,9 +1,12 @@
 import './App.css';
 import { useState } from 'react';
+import {Button, Alert} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [value, setValue] = useState('teste');
   const [celcius, setCelcius] = useState('');
+  const [show, setShow] = useState(false)
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -12,6 +15,7 @@ function App() {
     event.preventDefault();
     console.log(value);
       const valueConverted = Math.round((value - 32)  * 5 / 9);
+      setShow(true);
       setCelcius(valueConverted);
   }
   return (
@@ -21,9 +25,18 @@ function App() {
         <form>
           <input type="text" placeholder="Digite o valor em Fahrenheit"
           onChange={handleChange}/>
-          <button onClick={handleSubmit}>Enviar</button>
+          <Button variant="primary" onClick={handleSubmit}>Enviar</Button>
         </form>
-        <p>Celcius: {celcius}</p>
+        {celcius ?
+        <Alert variant="success">
+          <Alert.Heading>Temperatura em Celcius</Alert.Heading>
+          <p> {celcius}</p>
+            <div className="d-flex justify-content-end">
+            <Button onClick={() => setShow(false)} variant="outline-success">
+              Close me y'all!
+            </Button>
+          </div>
+        </Alert> : 'Digite um valor'}
       </header>
     </div>
   );
