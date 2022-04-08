@@ -27,10 +27,11 @@ function App() {
           onChange={handleChange}/>
           <Button variant="primary" onClick={handleSubmit}>Enviar</Button>
         </form>
-        {celcius ?
+        {celcius && show  ?
         <Alert variant="success">
           <Alert.Heading>Temperatura em Celcius</Alert.Heading>
-          <p> {celcius}</p>
+          {celcius > 30 ? <h1> {celcius} 🥵 </h1> : ''}
+          {celcius < 30 ? <h1> {celcius} 🥶 </h1> : ''}
             <div className="d-flex justify-content-end">
             <Button onClick={() => setShow(false)} variant="outline-success">
               Close me y'all!
